@@ -57,3 +57,10 @@ This file includes one row per study/treatment comparison. Key columns:
 3. Install required packages:
    ```r
    install.packages(c("dplyr", "ggplot2", "ggpubr", "viridis", "sf", "readxl"))
+
+---
+If you have any questions feel free to reach out to Julia Saltzman, JRS395@miami.edu 
+
+If using this repository or dataset in your work, please cite:
+
+Saltzman, J. et al. (in prep). Meta-analysis of Vessel Impacts on Marine Megafauna.
