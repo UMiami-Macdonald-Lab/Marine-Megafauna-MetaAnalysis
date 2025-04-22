@@ -1,6 +1,6 @@
 # Vessel Impact Meta-Analysis
 
-This repository contains the data, statistical models, and visualizations for a meta-analysis assessing the effects of vessels on marine megafauna. It includes response variables across behavior, physiology, vocalization, and abundance, and examines variation by effect type, taxonomic group, and conservation status.
+This repository contains the data, models, and figures for a meta-analysis of the effects of vessel presence, noise, and regulation on marine megafauna. The project synthesizes behavioral, physiological, vocal, and abundance responses using effect sizes (log response ratios, LRRs) extracted from the literature.
 
 ---
 
@@ -8,53 +8,52 @@ This repository contains the data, statistical models, and visualizations for a 
 
 | File | Description |
 |------|-------------|
-| `MA_Data_Submission.xlsx` | Raw dataset used for all analyses and visualizations. |
-| `ANOVA_Histograms.R` | Generates histograms and exploratory plots to test ANOVA assumptions. |
-| `Abundance.Models.R` | GLMs and analysis code for abundance-related responses to vessel effects. |
-| `Behavior.Models.R` | Code for modeling behavioral response variables (e.g., avoidance, foraging shifts). |
-| `Physiology.Models.R` | Code to analyze physiological stress responses (e.g., cortisol, heart rate). |
-| `Figures.R` | Script to generate composite figures summarizing effect sizes across metrics. |
-| `README.md` | Overview of the repository and instructions for use. |
+| `MA_Data_Submission.xlsx` | Master dataset containing study-level extracted effect sizes and metadata. |
+| `ANOVA_Histograms.R` | Code for plotting histograms and diagnostic plots to assess ANOVA assumptions. |
+| `Abundance.Models.R` | Statistical models for abundance responses. |
+| `Behavior.Models.R` | GLMs and effect size models for behavioral responses. |
+| `Physiology.Models.R` | Code for modeling physiological metrics (e.g., stress responses). |
+| `Figures.R` | Script for generating composite summary figures across metrics. |
+| `README.md` | Repository overview and usage instructions. |
 
 ---
 
 ## 📊 Project Summary
 
-This project compiles effect sizes (log response ratios, or LRRs) from published literature examining how marine megafauna respond to vessel-related disturbances. It includes:
+This analysis compiles and synthesizes data on how marine megafauna respond to anthropogenic vessel disturbance. It evaluates variation in effect size magnitude across:
+- **Effect Types** (e.g., noise levels, presence/absence, distance, regulation)
+- **Response Categories** (Behavior, Physiology, Vocalization, Abundance)
+- **Taxonomic Groups** (e.g., Cetaceans, Fishes, Pinnipeds)
+- **IUCN Status** (e.g., Least Concern, Critically Endangered)
 
-- **Behavioral** responses (e.g., movement, activity budgets)
-- **Physiological** responses (e.g., stress hormones, metabolism)
-- **Vocalization** responses (e.g., call amplitude/frequency shifts)
-- **Abundance** changes associated with vessel activity
-
-Each model quantifies average absolute LRRs and standard errors across:
-
-- **Effect Types** (e.g., presence/absence, noise levels, distance, regulation)
-- **Focal Megafauna Groups** (e.g., cetaceans, pinnipeds, fishes)
-- **IUCN Conservation Status**
+All responses are standardized using the absolute log response ratio (|LRR|) to allow cross-study comparison.
 
 ---
 
 ## 📈 Data Description
 
-**File:** `MA_Data_Submission.xlsx`
+**File:** `MA_Data_Submission.xlsx`  
+This file includes one row per study/treatment comparison. Key columns:
 
-This dataset contains the following key columns:
-
-- `LRR`: Log Response Ratio (effect size)
-- `EFFECT_CLEAN_JULIA`: Cleaned categorical variable representing vessel effect types
-- `Focal.Megafauna.Group`: Group-level classification (e.g., 'Cetaceans', 'Fishes')
-- `IUCN.Status`: Conservation status (e.g., 'Least Concern', 'Critically Endangered')
-- `Year_paper`: Year of publication for each study
-- `LATITUDE_CLEAN_MICHELLE`, `LONGITUDE_CLEAN_MICHELLE`: Coordinates for study site (used in mapping)
-
-All plots and models draw from this master dataset.
+| Column | Description |
+|--------|-------------|
+| `Reference`, `Authors`, `Year`, `Journal`, `Link` | Study citation metadata |
+| `Ocean`, `Country`, `Body.Water`, `Specific.Location`, `Latitude`, `Longitude` | Geographic metadata |
+| `Focal.MF.Group`, `Focal.Species`, `IUCN.Status` | Biological grouping and conservation status |
+| `Effect.Category`, `Effect.Clean` | Vessel-related experimental treatment types |
+| `Response.Category`, `Response.Units.`, `Response.Clean` | Response variable type and standardization |
+| `Response.Mean.Vessels.Treatment`, `Response.SD.Vessels.Treatment`, `Response.N.Vessels.Treatment` | Treatment group summary statistics |
+| `Response.Mean.No.Vessels.Control`, `Response.SD.No.Vessels.Control`, `Response.N.No.Vessels.Control` | Control group summary statistics |
+| `LRR` | Log Response Ratio (effect size) |
+| `Vessel.Type.Broad`, `Vessel.Type.Specific` | Description of the vessel disturbance type |
+| `Collector`, `Entry.Date`, `Data.Source`, `Comments` | Data entry metadata |
 
 ---
 
 ## 🖥️ How to Use
 
-1. Open RStudio and clone or download this repository.
-2. Install required libraries:
+1. Clone or download this repository.
+2. Open any script in R or RStudio.
+3. Install required packages:
    ```r
-   install.packages(c("ggplot2", "dplyr", "ggpubr", "viridis", "sf", "readxl"))
+   install.packages(c("dplyr", "ggplot2", "ggpubr", "viridis", "sf", "readxl"))
